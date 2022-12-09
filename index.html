@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/128/644/644844.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn-icons-png.flaticon.com/128/644/644844.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Opgave 6 - Web-Applikation</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Opgave 6+7 - Web-App</h1>
+    </div>
+
+    <div id="app">
+        <!-- <p>Message:
+        <input id="inputField" v-model="textinput" placeholder="Write a sentence">
+        How many times:
+        <input id="inputFieldNumber" v-model="numberInput" placeholder="Write a Number">
+        <button id="button" v-on:click="RepeatXTimes(textinput,Numberinput)" class="btn btn-primary">Do it!</button>
+        </p>
+        <div id="outputField" > {{message}}</div> -->
+        <p>
+        <input id="inputField2" v-model="searchtext" type="search" placeholder="tast Bib nummer" >
+        <button id="searchButton" class="btn btn-primary" V-on:click="Search(searchtext)">Search</button>
+        <!--<select class="select" multiple data-mdb-placeholder="Example placeholder" multiple>-->
+            <label for="age-group-filter">Age Group filter:</label>
+            <select id="age-group-filter" v-model="selectedAgeGroup">
+              <option value="">All</option>
+              <option v-for="ageGroup in ageGroups" :value="ageGroup">
+                {{ ageGroup }}
+              </option>
+            </select>
+        <table id="firstTable" data-filter-control="true" class="table table-dark table-striped">
+            <tr>
+                <th>bib nr.</th>
+                <th>name</th>
+                <th>ageGroup</th>
+                <th>bike</th>
+                <th>run</th>
+                <th>total
+                    <a class="btn-sm text-warning" v-on:click="SortByTotal('asc')"><i class=" fa fa-angle-up"></i></a> <!-- opmærksom på at v-on:click skal ligge på a tagget, hvis den ligger på i tagget for du et mini gap hvor at knap/link ikke virker selvom det ligner det gør-->
+                    <a class="btn-sm text-warning" v-on:click="SortByTotal('desc')"><i class="fa fa-angle-down"></i></a>
+                </th>
+                <th>Delete</th>
+            </tr>
+            <tr v-for="duathlete in searchResults" :key="duathlete.bib">
+                <td>{{duathlete.bib}}</td>
+                <td>{{duathlete.name}}</td>
+                <td>{{duathlete.ageGroup}}</td>
+                <td>{{duathlete.bike}}</td>
+                <td>{{duathlete.run}}</td>
+                <td>{{duathlete.total}}</td>
+                <td ><button id="deleteButton" class="btn btn-danger btn-sm fa fa-trash" V-on:click="deleteId(duathlete.bib)"></button></td>
+            </tr>
+        </table>
+        <p>Add a Duathlete:</p>
+        <form class="form-inline">
+            <div class="form-group ">
+              <label class="sr-only" for="exampleFormControlInput1">name</label>
+              <input type="text" class="form-control mb-2 mr-sm-2" v-model="data.name" id="exampleFormControlInput1" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleFormControlInput1">age</label>
+                <input type="number" v-model="age" class="form-control mb-2 mr-sm-2" id="exampleFormControlInput2" placeholder="age">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleFormControlInput1">bike</label>
+                <input type="number" v-model="data.bike" class="form-control mb-2 mr-sm-2" id="exampleFormControlInput3" placeholder="bike">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleFormControlInput1">run</label>
+                <input type="number" v-model="data.run" class="form-control mb-2 mr-sm-2" id="exampleFormControlInput4" placeholder="run">
+              </div>
+            <button class="btn btn-primary" V-on:Click.prevent="addDuathlete()" >Add Duathlete</button>
+          </form>
+        <p>{{message}}</p>
+        <!--<li v-for="duathlete in duathletes" :key="duathlete.bib">{{duathlete.bib}}</li>-->
+        </p>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+</body>
+
+</html>
